@@ -1,0 +1,167 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Center(
+            child: Text('Aplicativo Calculadora',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                color: Colors.white, 
+                fontWeight: FontWeight.bold, 
+                )),
+          ),
+          backgroundColor: Colors.orange,
+          foregroundColor: Colors.white,
+          toolbarHeight: kToolbarHeight,
+        ),
+        body: SomadorForm(),
+        backgroundColor: Color(373739),
+      ),
+    );
+  }
+}
+
+class SomadorForm extends StatefulWidget {
+  @override
+  _SomadorFormState createState() => _SomadorFormState();
+}
+
+class _SomadorFormState extends State<SomadorForm> {
+  final TextEditingController _controller1 = TextEditingController();
+
+  final TextEditingController _controller2 = TextEditingController();
+
+  String _resultado = '';
+
+  void _somar() {
+    final double? numero1 = double.tryParse(_controller1.text);
+
+    final double? numero2 = double.tryParse(_controller2.text);
+
+    if (numero1 != null && numero2 != null) {
+      final double calcular = numero1 + numero2;
+
+      setState(() {
+        _resultado = 'Resultado: $calcular';
+      });
+    } else {
+      setState(() {
+        _resultado = 'Por favor, insira números válidos.';
+      });
+    }
+  }
+
+  void _subtra() {
+    final double? numero1 = double.tryParse(_controller1.text);
+
+    final double? numero2 = double.tryParse(_controller2.text);
+
+    if (numero1 != null && numero2 != null) {
+      final double calcular = numero1 - numero2;
+
+      setState(() {
+        _resultado = 'Resultado: $calcular';
+      });
+    } else {
+      setState(() {
+        _resultado = 'Por favor, insira números válidos.';
+      });
+    }
+  }
+
+  void _vezes() {
+    final double? numero1 = double.tryParse(_controller1.text);
+
+    final double? numero2 = double.tryParse(_controller2.text);
+
+    if (numero1 != null && numero2 != null) {
+      final double calcular = numero1 * numero2;
+
+      setState(() {
+        _resultado = 'Resultado: $calcular';
+      });
+    } else {
+      setState(() {
+        _resultado = 'Por favor, insira números válidos.';
+      });
+    }
+  }
+
+  void _div() {
+    final double? numero1 = double.tryParse(_controller1.text);
+
+    final double? numero2 = double.tryParse(_controller2.text);
+
+    if (numero1 != null && numero2 != null) {
+      final double calcular = numero1 / numero2;
+
+      setState(() {
+        _resultado = 'Resultado: $calcular';
+      });
+    } else {
+      setState(() {
+        _resultado = 'Por favor, insira números válidos.';
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextField(
+            controller: _controller1,
+            decoration: InputDecoration(labelText: 'Número 1'),
+            keyboardType: TextInputType.number,
+          ),
+          TextField(
+            controller: _controller2,
+            decoration: InputDecoration(labelText: 'Número 2'),
+            keyboardType: TextInputType.number,
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: _somar,
+                child: Text('+'),
+                
+              ),
+              SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: _subtra,
+                child: Text('-'),
+              ),
+              SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: _vezes,
+                child: Text('x'),
+              ),
+              SizedBox(width: 20),
+              ElevatedButton(
+                onPressed: _div,
+                child: Text('/'),
+                
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Text(_resultado, style: TextStyle(fontSize: 24)),
+        ],
+      ),
+    );
+  }
+}
+
