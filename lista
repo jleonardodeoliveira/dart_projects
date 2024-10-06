@@ -1,0 +1,146 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Sample Input',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Forms(),
+    );
+  }
+}
+
+class Forms extends StatefulWidget {
+  @override
+  FormsState createState() => FormsState();
+}
+
+class FormsState extends State<Forms> {
+  final List<String> westernTeams = [
+    'Los Angeles Lakers', 'Golden State Warriors', 'San Antonio Spurs',
+    'Houston Rockets', 'Phoenix Suns', 'Denver Nuggets',
+    'Minnesota Timberwolves', 'Oklahoma City Thunder',
+    'Portland Trail Blazers', 'Utah Jazz', 'Los Angeles Clippers',
+    'Sacramento Kings', 'Dallas Mavericks', 'New Orleans Pelicans',
+    'Memphis Grizzlies'
+  ];
+
+  final List<String> easternTeams = [
+    'Miami Heat', 'Orlando Magic', 'Chicago Bulls', 
+    'Cleveland Cavaliers', 'Philadelphia 76ers', 'Boston Celtics',
+    'New York Knicks', 'Brooklyn Nets', 'Toronto Raptors',
+    'Detroit Pistons', 'Indiana Pacers', 'Milwaukee Bucks',
+    'Charlotte Hornets', 'Atlanta Hawks', 'Washington Wizards'
+  ];
+
+  String _selectedItem = '';
+
+  void _updateSelectedItem(String item) {
+    setState(() {
+      _selectedItem = item;
+    });
+  }
+
+  Widget _buildTeamList(List<String> teams) {
+    return Container(
+      width: 150,
+      height: 400,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 10.0,
+            offset: Offset(0, 5),
+          ),
+        ],
+      ),
+      child: ListView.builder(
+        itemCount: teams.length,
+        itemBuilder: (context, index) {
+          return Card(
+            elevation: 2,
+            margin: EdgeInsets.symmetric(vertical: 4),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ListTile(
+              title: Text(
+                teams[index],
+                style: TextStyle(color: Colors.black),
+              ),
+              onTap: () => _updateSelectedItem(teams[index]),
+              tileColor: _selectedItem == teams[index] ? Colors.lightBlue[100] : null,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Times da NBA'),
+        centerTitle: true,
+        elevation: 4,
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(16.0),
+        color: Colors.blueGrey[900],
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+                const Text(
+                  'Escolha seu time',
+                  style: TextStyle(fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const Text(
+                      'Oeste',
+                      style: TextStyle(fontSize: 22, color: Colors.white),
+                    ),
+                    const Text(
+                      'Leste',
+                      style: TextStyle(fontSize: 22, color: Colors.white),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(child: _buildTeamList(westernTeams)),
+                    const SizedBox(width: 16),
+                    Expanded(child: _buildTeamList(easternTeams)),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Selecionado: $_selectedItem',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
