@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.white, // Cor do AppBar
-        scaffoldBackgroundColor: Color(0xFFF5F5DC), // Fundo da aplicação (bege claro)
+        scaffoldBackgroundColor: Color(0xFF004d00), // Fundo da aplicação (verde escuro)
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          backgroundColor: Colors.blue, // Cor do AppBar
+          backgroundColor: Color(0xFF006600), // Cor do AppBar (verde mais forte)
         ),
         body: SomadorForm(),
       ),
@@ -73,7 +73,7 @@ class _SomadorFormState extends State<SomadorForm> {
       child: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Color(0xFFccffcc), // Cor branca com um verde mais fraco
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
@@ -94,6 +94,7 @@ class _SomadorFormState extends State<SomadorForm> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  labelStyle: TextStyle(color: Color(0xFF006600)), // Cor da label
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -105,6 +106,7 @@ class _SomadorFormState extends State<SomadorForm> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  labelStyle: TextStyle(color: Color(0xFF006600)), // Cor da label
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -118,8 +120,8 @@ class _SomadorFormState extends State<SomadorForm> {
                 style: ElevatedButton.styleFrom(
                   shape: CircleBorder(),
                   padding: EdgeInsets.all(20),
-                  backgroundColor: Colors.blue, // Background color
-                  foregroundColor: Colors.white, // Text Color
+                  backgroundColor: Color(0xFF006600), // Cor do botão
+                  foregroundColor: Colors.white, // Cor do texto
                 ),
               ),
               SizedBox(height: 30),
@@ -139,3 +141,4 @@ class _SomadorFormState extends State<SomadorForm> {
     );
   }
 }
+
